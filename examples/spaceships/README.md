@@ -1,0 +1,1 @@
+The board isn't endless, so all spaceships will evantually get to a stable position.

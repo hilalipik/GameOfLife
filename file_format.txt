@@ -1,6 +1,0 @@
-Every dead cell is represented by a space - ' '
-Every living cell is represented by a star - '*'
-Separate the cells with a comma - ','
-You can have as many lines and columns as you'd like.
-
-See blinker.txt for example

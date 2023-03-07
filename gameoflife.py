@@ -2,14 +2,14 @@ import time
 import os
 import copy
 import argparse
-from FileReader import FileReader
+import FileReader
 
 ALIVE_FORMAT = '*'
 DEAD_FORMAT = ' '
 ALIVE = 1
 DEAD = 0
 
-MSG = '''
+ASCII_MSG = '''
    _____                         ____   __   _      _  __     
   / ____|                       / __ \ / _| | |    (_)/ _|    
  | |  __  __ _ _ __ ___   ___  | |  | | |_  | |     _| |_ ___ 
@@ -19,22 +19,15 @@ MSG = '''
                                                               
                                                               '''
 
-description = '''Game of life is a zero-player game, which means it is detemined by it's initial state. You get to decide what the board looks like at the start of the game, using a text file according to the format (see file_format.txt).
-Every square on the board represents a cell, which can be dead or alive. In each generation a cell can die, revive or stay the same according to it's neighbours(the 6 surrounding cells).
-The rules are:
-\t[1] Any live cell with two or three live neighbours survives.
-\t[2] Any dead cell with three live neighbours becomes a live cell.
-\t[3] All other live cells die in the next generation, and all other dead cells stay dead.
-'''
-def init_board(file_path : str) ->list:
+
+def init_board(file_path : str) ->list[list[int]]:
     '''
     Function initializes a board according to the content in file.
     Input: file path.
     Output: initialized board.
     '''
     board = []
-    reader = FileReader(file_path)
-    file_content = reader.read_lines()
+    file_content = FileReader.read_lines(file_path)
 
     for line in file_content:
         board_line = []
@@ -91,7 +84,7 @@ def print_board(board : list[list[int]]) ->None:
     Output: none
     '''
     os.system('clear')
-    print(MSG)
+    print(ASCII_MSG)
     for line in board:
         print('\t\t    |', end='')
         for cell in line:
@@ -100,7 +93,7 @@ def print_board(board : list[list[int]]) ->None:
             else:
                 print(f' {DEAD_FORMAT} ', end='');
         print('|')
-
+    
 
 def main(file_path : str, generations : int) ->None:
     board = init_board(file_path)
@@ -113,9 +106,9 @@ def main(file_path : str, generations : int) ->None:
 
 if __name__ =="__main__":
     parser = argparse.ArgumentParser(prog="Game Of Life",
-                                     description=description,
-                                     epilog="Try blinker.txt as an initial file for example, for as many generations you'd like")
-    parser.add_argument("file_path", help="the file path to the initial board state.")
+                                     description="Runs game of life on an initial state (read from file) for a requested number of generations.",
+                                     epilog="Try examples/repeaters/blinker as an initial file, for as many generations you'd like.")
+    parser.add_argument("file_path", type=str, help="the file path to the initial board state.")
     parser.add_argument("generations", type=int, help="the number of generations to present.")
     args = parser.parse_args()
     main(args.file_path, args.generations)
