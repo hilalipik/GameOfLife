@@ -2,7 +2,7 @@ import time
 import os
 import copy
 import argparse
-import FileReader
+import file_reader
 
 ALIVE_FORMAT = '*'
 DEAD_FORMAT = ' '
@@ -27,7 +27,7 @@ def init_board(file_path : str) ->list[list[int]]:
     Output: initialized board.
     '''
     board = []
-    file_content = FileReader.read_lines(file_path)
+    file_content = file_reader.read_lines(file_path)
 
     for line in file_content:
         board_line = []
