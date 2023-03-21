@@ -12,4 +12,4 @@ Format:
     Separate the cells with a comma - ','
     You can have as many lines and columns as you'd like.
 
-    See blinker.txt for example
+    See examples/repeaters/blinker.txt for example
